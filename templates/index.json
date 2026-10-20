@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "nav": {
@@ -88,7 +79,9 @@
     },
     "marquee": {
       "type": "waterboy-marquee",
-      "settings": { "items": "FAST ABSORBING | ZERO SUGAR | NON-GMO | MADE IN USA | 1200MG ELECTROLYTES | 200MG L-THEANINE | B-COMPLEX" }
+      "settings": {
+        "items": "FAST ABSORBING | ZERO SUGAR | NON-GMO | MADE IN USA | 1200MG ELECTROLYTES | 200MG L-THEANINE | B-COMPLEX"
+      }
     },
     "benefits": {
       "type": "waterboy-benefits",

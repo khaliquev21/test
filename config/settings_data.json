@@ -1,6 +1,10 @@
 {
-  "current": "Default",
+  "current": {
+    "color_scheme": "dark"
+  },
   "presets": {
-    "Default": {}
+    "Default": {
+      "color_scheme": "dark"
+    }
   }
 }

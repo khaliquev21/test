@@ -2,10 +2,27 @@
   {
     "name": "theme_info",
     "theme_name": "Waterboy",
-    "theme_version": "1.0.0",
+    "theme_version": "1.1.0",
     "theme_author": "Waterboy Co.",
     "theme_documentation_url": "https://help.shopify.com",
     "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Appearance",
+    "settings": [
+      {
+        "type": "select",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "info": "The original design was built in dark mode. Switch to Light for the cream palette, or Auto to follow the visitor's system preference.",
+        "options": [
+          { "value": "dark",  "label": "Dark (default)" },
+          { "value": "light", "label": "Light" },
+          { "value": "auto",  "label": "Auto (follow system)" }
+        ],
+        "default": "dark"
+      }
+    ]
   },
   {
     "name": "General",

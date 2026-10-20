@@ -1,9 +1,25 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+{%- liquid
+  assign color_scheme = settings.color_scheme | default: 'dark'
+  if color_scheme == 'dark'
+    assign theme_color_meta = '#0F1420'
+    assign body_bg = '#0F1420'
+    assign body_fg = '#F3F5FA'
+  elsif color_scheme == 'light'
+    assign theme_color_meta = '#FBF7EE'
+    assign body_bg = '#FBF7EE'
+    assign body_fg = '#0A1428'
+  else
+    assign theme_color_meta = '#0F1420'
+    assign body_bg = '#FBF7EE'
+    assign body_fg = '#0A1428'
+  endif
+-%}
+<html lang="{{ request.locale.iso_code }}"{% unless color_scheme == 'auto' %} data-theme="{{ color_scheme }}"{% endunless %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#FBF7EE">
+  <meta name="theme-color" content="{{ theme_color_meta }}">
 
   <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
 
@@ -21,7 +37,7 @@
 
   <style>
     html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #FBF7EE; color: #0A1428; }
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: {{ body_bg }}; color: {{ body_fg }}; }
   </style>
 </head>
 <body class="waterboy-page template-{{ template | split: '.' | first | handle }}">

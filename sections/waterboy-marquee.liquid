@@ -1,0 +1,38 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign items = section.settings.items | default: 'FAST ABSORBING | ZERO SUGAR | NON-GMO | MADE IN USA | 1200MG ELECTROLYTES | 200MG L-THEANINE | B-COMPLEX'
+  assign items_arr = items | split: '|'
+-%}
+
+<div class="waterboy">
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-track">
+      <span>
+        {%- for item in items_arr -%}
+          {{ item | strip }} <span class="star">★</span>{% unless forloop.last %} {% endunless %}
+        {%- endfor -%}
+      </span>
+      <span>
+        {%- for item in items_arr -%}
+          {{ item | strip }} <span class="star">★</span>{% unless forloop.last %} {% endunless %}
+        {%- endfor -%}
+      </span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy Marquee",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "items",
+      "label": "Marquee items (pipe-separated)",
+      "default": "FAST ABSORBING | ZERO SUGAR | NON-GMO | MADE IN USA | 1200MG ELECTROLYTES | 200MG L-THEANINE | B-COMPLEX"
+    }
+  ],
+  "presets": [ { "name": "Waterboy Marquee" } ]
+}
+{% endschema %}

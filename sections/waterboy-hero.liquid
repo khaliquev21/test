@@ -1,0 +1,97 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          {% if section.settings.eyebrow != blank %}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {% endif %}
+          <h1 style="margin-top:14px">
+            {{ section.settings.heading_before }}
+            {% if section.settings.heading_highlight != blank %}
+              <span class="lime">{{ section.settings.heading_highlight }}</span>
+            {% endif %}
+          </h1>
+          {% if section.settings.lede != blank %}
+            <p class="lede">{{ section.settings.lede }}</p>
+          {% endif %}
+          <div class="hero-cta-row">
+            {% if section.settings.cta_primary_label != blank %}
+              <a href="{{ section.settings.cta_primary_url | default: '#shop' }}" class="btn btn-primary">
+                {{ section.settings.cta_primary_label }}
+              </a>
+            {% endif %}
+            {% if section.settings.cta_secondary_label != blank %}
+              <a href="{{ section.settings.cta_secondary_url | default: '#how' }}" class="btn btn-secondary">
+                {{ section.settings.cta_secondary_label }}
+              </a>
+            {% endif %}
+          </div>
+          <div class="hero-mini-trust">
+            <span>
+              <span class="stars">{{ section.settings.trust_stars | default: '★★★★★' }}</span>
+              <strong>{{ section.settings.trust_rating }}</strong> · {{ section.settings.trust_count }}
+            </span>
+            {% if section.settings.trust_item_2 != blank %}
+              <span>{{ section.settings.trust_item_2 }}</span>
+            {% endif %}
+            {% if section.settings.trust_item_3 != blank %}
+              <span>{{ section.settings.trust_item_3 }}</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="product-stage" data-stage-word="{{ section.settings.stage_word | default: 'RECOVERY' }}">
+          {% if section.settings.product_image %}
+            <img class="product-image" src="{{ section.settings.product_image | image_url: width: 800 }}" alt="{{ section.settings.product_image.alt | default: section.settings.heading_before | escape }}" width="800" height="800" loading="eager">
+          {% else %}
+            <div class="can">
+              <div class="can-badge">
+                {{ section.settings.badge_text | default: 'NEW' }}<span class="n">{{ section.settings.badge_count | default: '24ct' }}</span>
+              </div>
+              <div class="can-label">
+                {{ section.settings.can_label_top | default: 'Water' }}
+                <span class="accent">{{ section.settings.can_label_bottom | default: 'Boy' }}</span>
+              </div>
+              <div class="can-sub">{{ section.settings.can_sub | default: 'Recovery Mix · Berry' }}</div>
+              <div class="can-base">{{ section.settings.can_base | default: 'Electrolytes · L-Theanine · B-Complex' }}</div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hangover · Workout · Wellness" },
+    { "type": "text", "id": "heading_before", "label": "Heading (first part)", "default": "Feel Human Again In" },
+    { "type": "text", "id": "heading_highlight", "label": "Heading (highlighted part)", "default": "15 Minutes." },
+    { "type": "textarea", "id": "lede", "label": "Subheading", "default": "The recovery drink mix built with 6 electrolytes, L-Theanine, and a full stack of B vitamins. Mix one stick with water. Replace the entire shelf of pills, pedialyte, and gas-station Gatorade." },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary button label", "default": "Shop The Packs →" },
+    { "type": "url", "id": "cta_primary_url", "label": "Primary button URL" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary button label", "default": "How It Works" },
+    { "type": "url", "id": "cta_secondary_url", "label": "Secondary button URL" },
+    { "type": "header", "content": "Trust row" },
+    { "type": "text", "id": "trust_stars", "label": "Stars", "default": "★★★★★" },
+    { "type": "text", "id": "trust_rating", "label": "Rating", "default": "4.9/5" },
+    { "type": "text", "id": "trust_count", "label": "Review count copy", "default": "12,847 reviews" },
+    { "type": "text", "id": "trust_item_2", "label": "Trust item 2", "default": "Free shipping over $35" },
+    { "type": "text", "id": "trust_item_3", "label": "Trust item 3", "default": "60-day guarantee" },
+    { "type": "header", "content": "Product visual" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image (optional — replaces illustrated can)" },
+    { "type": "text", "id": "stage_word", "label": "Background word", "default": "RECOVERY" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "NEW" },
+    { "type": "text", "id": "badge_count", "label": "Badge count", "default": "24ct" },
+    { "type": "text", "id": "can_label_top", "label": "Can label (top)", "default": "Water" },
+    { "type": "text", "id": "can_label_bottom", "label": "Can label (accent)", "default": "Boy" },
+    { "type": "text", "id": "can_sub", "label": "Can sub", "default": "Recovery Mix · Berry" },
+    { "type": "text", "id": "can_base", "label": "Can base", "default": "Electrolytes · L-Theanine · B-Complex" }
+  ],
+  "presets": [ { "name": "Waterboy Hero" } ]
+}
+{% endschema %}

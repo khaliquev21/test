@@ -1,0 +1,49 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>{{ section.settings.copyright | default: '© 2026 Waterboy Co. · Hamilton, ON' }}</div>
+        <div class="foot-links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link' -%}
+              <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy Footer",
+  "settings": [
+    { "type": "text", "id": "copyright", "label": "Copyright line", "default": "© 2026 Waterboy Co. · Hamilton, ON" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Footer link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "url", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Waterboy Footer",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Shipping" } },
+        { "type": "link", "settings": { "label": "Returns" } },
+        { "type": "link", "settings": { "label": "Contact" } },
+        { "type": "link", "settings": { "label": "Privacy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

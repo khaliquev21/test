@@ -1,0 +1,77 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="waterboy">
+  <div class="nav-band">
+    <div class="wrap">
+      <nav class="nav">
+        <a class="logo" href="{{ section.settings.logo_link | default: '/' }}">
+          {{ section.settings.logo_text | default: 'Waterboy' }}<span class="dot"></span>
+        </a>
+        <ul class="nav-links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url | default: '#' }}">{{ block.settings.label }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <a class="cart-btn" href="{{ routes.cart_url }}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L22 7H6"/><circle cx="10" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+          {{ section.settings.cart_label | default: 'Cart' }} · {{ cart.item_count | default: 0 }}
+        </a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy Nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Waterboy"
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link"
+    },
+    {
+      "type": "text",
+      "id": "cart_label",
+      "label": "Cart button label",
+      "default": "Cart"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "url", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Waterboy Nav",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Benefits" } },
+        { "type": "link", "settings": { "label": "Reviews" } },
+        { "type": "link", "settings": { "label": "How It Works" } },
+        { "type": "link", "settings": { "label": "Shop" } },
+        { "type": "link", "settings": { "label": "FAQ" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

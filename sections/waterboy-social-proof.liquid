@@ -1,0 +1,107 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'waterboy.js' | asset_url }}" defer></script>
+
+<div class="waterboy">
+  <section class="social-band">
+    <div class="wrap">
+      <div class="social-head">
+        {% if section.settings.script != blank %}
+          <span class="script">{{ section.settings.script }}</span>
+        {% endif %}
+        <h2>
+          {{ section.settings.heading_before }}
+          {% if section.settings.heading_big != blank %}
+            <span class="big">{{ section.settings.heading_big }}</span>
+          {% endif %}
+          {{ section.settings.heading_after }}
+        </h2>
+      </div>
+
+      <div class="proof-row" id="proofRow">
+        {%- for block in section.blocks -%}
+          <article class="proof-card" {{ block.shopify_attributes }}>
+            <div class="proof-thumb thumb-{{ block.settings.palette | default: 'a' }}">
+              <span class="thumb-badge">{{ block.settings.duration }}</span>
+              <span class="thumb-mark">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              {% if block.settings.video_url != blank %}
+                <a class="play" href="{{ block.settings.video_url }}" target="_blank" rel="noopener" aria-label="Play">
+                  <svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </a>
+              {% else %}
+                <span class="play">
+                  <svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              {% endif %}
+              <span class="handle">{{ block.settings.handle }}</span>
+            </div>
+            <p class="proof-caption">{{ block.settings.caption }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <div class="proof-nav">
+        <button class="arrow" type="button" aria-label="Previous" id="prevBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="proof-dots" id="dots">
+          {%- for block in section.blocks -%}
+            <button class="dot{% if forloop.first %} active{% endif %}" type="button" aria-label="Page {{ forloop.index }}"></button>
+          {%- endfor -%}
+        </div>
+        <button class="arrow" type="button" aria-label="Next" id="nextBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy Social Proof",
+  "settings": [
+    { "type": "text", "id": "script", "label": "Script line", "default": "don't take our word for it..." },
+    { "type": "text", "id": "heading_before", "label": "Heading (before highlight)", "default": "You're not gonna find" },
+    { "type": "text", "id": "heading_big", "label": "Highlighted number", "default": "150,000+" },
+    { "type": "text", "id": "heading_after", "label": "Heading (after highlight)", "default": "people this happy or hydrated anywhere else on the internet." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Video card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "palette",
+          "label": "Thumbnail palette",
+          "options": [
+            { "value": "a", "label": "Orange / Pink" },
+            { "value": "b", "label": "Mint / Teal" },
+            { "value": "c", "label": "Purple / Indigo" },
+            { "value": "d", "label": "Gold / Red" },
+            { "value": "e", "label": "Sky / Blue" }
+          ],
+          "default": "a"
+        },
+        { "type": "text", "id": "duration", "label": "Duration label", "default": "0:34" },
+        { "type": "text", "id": "handle", "label": "Handle", "default": "@customer.handle" },
+        { "type": "textarea", "id": "caption", "label": "Caption", "default": "\"Great quote from this customer.\"" },
+        { "type": "url", "id": "video_url", "label": "Video URL (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Waterboy Social Proof",
+      "blocks": [
+        { "type": "card", "settings": { "palette": "a", "duration": "0:34", "handle": "@morningafter.sam", "caption": "\"I used to spend my Sundays horizontal — now one stick and I'm actually productive.\"" } },
+        { "type": "card", "settings": { "palette": "b", "duration": "1:12", "handle": "@fitwithkayla", "caption": "\"Here's the exact difference between this and the orange sports drinks everyone grew up on.\"" } },
+        { "type": "card", "settings": { "palette": "c", "duration": "0:48", "handle": "@tryeverything.anna", "caption": "\"Tried every recovery drink in the gas station. This one actually fixes you.\"" } },
+        { "type": "card", "settings": { "palette": "d", "duration": "0:22", "handle": "@danny.coaches", "caption": "\"Pre-workout fuel for my 6am clients. Nobody's cramping anymore.\"" } },
+        { "type": "card", "settings": { "palette": "e", "duration": "1:04", "handle": "@weekend.will", "caption": "\"Drinking berry Waterboy this morning instead of calling in sick again.\"" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

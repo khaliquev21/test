@@ -1,0 +1,58 @@
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section class="faq" id="{{ section.settings.anchor | default: 'faq' }}">
+    <div class="wrap">
+      <div class="section-head">
+        {% if section.settings.eyebrow != blank %}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endif %}
+      </div>
+      <div class="faq-list">
+        {%- for block in section.blocks -%}
+          <details {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}</summary>
+            <p>{{ block.settings.answer }}</p>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Waterboy FAQ",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor id", "default": "faq" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything You Were Gonna Ask." }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Answer." }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Waterboy FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "Does this actually work for hangovers?", "answer": "The three things a hangover is made of — dehydration, electrolyte depletion, and B-vitamin burn — are exactly what Waterboy replaces. The L-Theanine takes the edge off the anxious, foggy part. It's not magic, but it's the closest thing we've shipped." } },
+        { "type": "qa", "settings": { "question": "How is this different from Liquid I.V. or Pedialyte?", "answer": "About twice the electrolyte load, no sugar, and the addition of L-Theanine and a full B-complex. Pedialyte is designed for sick kids; Liquid I.V. is sugary. This is built specifically for adults recovering from stress on the body — nights out, long workouts, travel." } },
+        { "type": "qa", "settings": { "question": "When should I drink it?", "answer": "Three windows that work best: before bed on a drinking night, first thing in the morning when you wake up rough, or 30 minutes before a hard workout. Some people take one daily just to stay topped up." } },
+        { "type": "qa", "settings": { "question": "What does it taste like?", "answer": "Three flavors right now: Berry (the one everyone starts with), Mango, and Lemon-Lime. Lightly sweet from stevia and monk fruit — closer to flavored water than a sports drink." } },
+        { "type": "qa", "settings": { "question": "What's the return policy?", "answer": "60 days. If it doesn't do what we said it does, email us and we refund — no need to send the box back." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

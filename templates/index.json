@@ -9,12 +9,135 @@
  */
 {
   "sections": {
-    "test": {
+    "nav": {
+      "type": "waterboy-nav",
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "Benefits", "url": "#benefits" } },
+        "l2": { "type": "link", "settings": { "label": "Reviews", "url": "#reviews" } },
+        "l3": { "type": "link", "settings": { "label": "How It Works", "url": "#how" } },
+        "l4": { "type": "link", "settings": { "label": "Shop", "url": "#shop" } },
+        "l5": { "type": "link", "settings": { "label": "FAQ", "url": "#faq" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5"],
+      "settings": { "logo_text": "Waterboy", "logo_link": "/", "cart_label": "Cart" }
+    },
+    "hero": {
       "type": "waterboy-hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Hangover · Workout · Wellness",
+        "heading_before": "Feel Human Again In",
+        "heading_highlight": "15 Minutes.",
+        "lede": "The recovery drink mix built with 6 electrolytes, L-Theanine, and a full stack of B vitamins. Mix one stick with water. Replace the entire shelf of pills, pedialyte, and gas-station Gatorade.",
+        "cta_primary_label": "Shop The Packs →",
+        "cta_primary_url": "#shop",
+        "cta_secondary_label": "How It Works",
+        "cta_secondary_url": "#how",
+        "trust_stars": "★★★★★",
+        "trust_rating": "4.9/5",
+        "trust_count": "12,847 reviews",
+        "trust_item_2": "Free shipping over $35",
+        "trust_item_3": "60-day guarantee",
+        "stage_word": "RECOVERY",
+        "badge_text": "NEW",
+        "badge_count": "24ct",
+        "can_label_top": "Water",
+        "can_label_bottom": "Boy",
+        "can_sub": "Recovery Mix · Berry",
+        "can_base": "Electrolytes · L-Theanine · B-Complex"
+      }
+    },
+    "marquee": {
+      "type": "waterboy-marquee",
+      "settings": { "items": "FAST ABSORBING | ZERO SUGAR | NON-GMO | MADE IN USA | 1200MG ELECTROLYTES | 200MG L-THEANINE | B-COMPLEX" }
+    },
+    "benefits": {
+      "type": "waterboy-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "shield", "title": "1200mg Electrolytes", "body": "Sodium, potassium, magnesium, calcium, chloride, and phosphorus — 2x what you'll find in a Liquid I.V. stick." } },
+        "b2": { "type": "benefit", "settings": { "icon": "clock",  "title": "L-Theanine 200mg",  "body": "Takes the edge off brain fog and anxious shakes without the sedating pull of melatonin." } },
+        "b3": { "type": "benefit", "settings": { "icon": "bolt",   "title": "Full B-Complex",    "body": "B1, B3, B5, B6, B12 and folate — the vitamins alcohol strips first and your body needs to produce energy." } },
+        "b4": { "type": "benefit", "settings": { "icon": "check",  "title": "Zero Added Sugar",  "body": "Sweetened with stevia and monk fruit. Three real-fruit flavors, no artificial colors, nothing to crash from." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "anchor": "benefits",
+        "eyebrow": "What's Inside",
+        "heading": "Built For Mornings You'd Rather Forget.",
+        "body": "Four actives working together to flush dehydration, settle the stomach, and get your head back in the game — without the sugar crash."
+      }
+    },
+    "social": {
+      "type": "waterboy-social-proof",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "palette": "a", "duration": "0:34", "handle": "@morningafter.sam",    "caption": "\"I used to spend my Sundays horizontal — now one stick and I'm actually productive.\"" } },
+        "c2": { "type": "card", "settings": { "palette": "b", "duration": "1:12", "handle": "@fitwithkayla",        "caption": "\"Here's the exact difference between this and the orange sports drinks everyone grew up on.\"" } },
+        "c3": { "type": "card", "settings": { "palette": "c", "duration": "0:48", "handle": "@tryeverything.anna",  "caption": "\"Tried every recovery drink in the gas station. This one actually fixes you.\"" } },
+        "c4": { "type": "card", "settings": { "palette": "d", "duration": "0:22", "handle": "@danny.coaches",       "caption": "\"Pre-workout fuel for my 6am clients. Nobody's cramping anymore.\"" } },
+        "c5": { "type": "card", "settings": { "palette": "e", "duration": "1:04", "handle": "@weekend.will",        "caption": "\"Drinking berry Waterboy this morning instead of calling in sick again.\"" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5"],
+      "settings": {
+        "script": "don't take our word for it...",
+        "heading_before": "You're not gonna find",
+        "heading_big": "150,000+",
+        "heading_after": "people this happy or hydrated anywhere else on the internet."
+      }
+    },
+    "reviews": {
+      "type": "waterboy-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "title": "Finally. Something that works.", "body": "I'm 38 and hangovers hit like a truck. Drank one of these before bed after a wedding and woke up genuinely fine. Not better than usual — actually fine. Converting all my friends.", "author": "Marcus T. · Verified Buyer" } },
+        "r2": { "type": "review", "settings": { "title": "Better than Liquid I.V. by a mile", "body": "Not even close. Tastes less fake, no weird sugar crash two hours later, and the L-Theanine actually makes a noticeable difference the morning after. Subscribed.", "author": "Priya S. · Verified Buyer" } },
+        "r3": { "type": "review", "settings": { "title": "My gym bag staple", "body": "Mixing it 30 min before I lift and crushing it. Zero sugar is the detail that sold me — nothing else at this electrolyte level is clean.", "author": "Jordan R. · Verified Buyer" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": { "anchor": "reviews", "eyebrow": "Verified Reviews", "heading": "12,847 Five-Star Reviews And Counting." }
+    },
+    "how": {
+      "type": "waterboy-how",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Tear & Pour", "body": "Empty one stick pack into 12-16 oz of cold water." } },
+        "s2": { "type": "step", "settings": { "title": "Stir & Shake", "body": "Mixes clean in seconds — no gritty bottom-of-the-glass finish." } },
+        "s3": { "type": "step", "settings": { "title": "Feel It Hit", "body": "Most customers feel noticeably clearer within 15–20 minutes." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "anchor": "how", "eyebrow": "Dead Simple", "heading": "Mix. Drink. Recover." }
+    },
+    "faq": {
+      "type": "waterboy-faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "Does this actually work for hangovers?",            "answer": "The three things a hangover is made of — dehydration, electrolyte depletion, and B-vitamin burn — are exactly what Waterboy replaces. The L-Theanine takes the edge off the anxious, foggy part. It's not magic, but it's the closest thing we've shipped." } },
+        "q2": { "type": "qa", "settings": { "question": "How is this different from Liquid I.V. or Pedialyte?", "answer": "About twice the electrolyte load, no sugar, and the addition of L-Theanine and a full B-complex. Pedialyte is designed for sick kids; Liquid I.V. is sugary. This is built specifically for adults recovering from stress on the body — nights out, long workouts, travel." } },
+        "q3": { "type": "qa", "settings": { "question": "When should I drink it?",                             "answer": "Three windows that work best: before bed on a drinking night, first thing in the morning when you wake up rough, or 30 minutes before a hard workout. Some people take one daily just to stay topped up." } },
+        "q4": { "type": "qa", "settings": { "question": "What does it taste like?",                            "answer": "Three flavors right now: Berry (the one everyone starts with), Mango, and Lemon-Lime. Lightly sweet from stevia and monk fruit — closer to flavored water than a sports drink." } },
+        "q5": { "type": "qa", "settings": { "question": "What's the return policy?",                           "answer": "60 days. If it doesn't do what we said it does, email us and we refund — no need to send the box back." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": { "anchor": "faq", "eyebrow": "Questions", "heading": "Everything You Were Gonna Ask." }
+    },
+    "final": {
+      "type": "waterboy-final-cta",
+      "settings": {
+        "heading_before": "Stop Dreading",
+        "heading_accent": "Tomorrow Morning.",
+        "body": "One box in the pantry replaces half the stuff on your bathroom shelf. 60-day guarantee if it doesn't deliver.",
+        "cta_label": "Grab A Pack →",
+        "cta_url": "#shop"
+      }
+    },
+    "footer": {
+      "type": "waterboy-footer",
+      "blocks": {
+        "fl1": { "type": "link", "settings": { "label": "Shipping" } },
+        "fl2": { "type": "link", "settings": { "label": "Returns" } },
+        "fl3": { "type": "link", "settings": { "label": "Contact" } },
+        "fl4": { "type": "link", "settings": { "label": "Privacy" } }
+      },
+      "block_order": ["fl1", "fl2", "fl3", "fl4"],
+      "settings": { "copyright": "© 2026 Waterboy Co. · Hamilton, ON" }
     }
   },
   "order": [
-    "test"
+    "nav", "hero", "marquee", "benefits", "social", "reviews", "how", "faq", "final", "footer"
   ]
 }

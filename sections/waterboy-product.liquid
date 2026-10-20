@@ -88,7 +88,7 @@
             {%- if has_product and product.description != blank and section.settings.use_product_description -%}
               {{ product.description | strip_html | truncatewords: 50 }}
             {%- else -%}
-              {{ section.settings.tagline | default: 'The all-in-one recovery stick for mornings you''d rather forget. 1200mg electrolytes, 200mg L-Theanine, and a full B-complex — in one glass of water.' }}
+              {{ section.settings.tagline | default: "The all-in-one recovery stick for mornings you'd rather forget. 1200mg electrolytes, 200mg L-Theanine, and a full B-complex — in one glass of water." }}
             {%- endif -%}
           </p>
 

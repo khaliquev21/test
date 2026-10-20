@@ -1,0 +1,29 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <div class="section-head">
+        <h2>{{ 'general.search.search' | t | default: 'Search' }}</h2>
+      </div>
+      <form action="{{ routes.search_url }}" method="get" style="margin-bottom: 32px; display:flex; gap:10px;">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t | default: 'Search' }}" style="flex:1; padding: 12px 18px; border: 2px solid var(--line); border-radius: 999px; font-size: 15px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      {%- if search.performed -%}
+        <p style="color: var(--mute); margin-bottom: 20px;">{{ search.results_count }} results for "{{ search.terms | escape }}"</p>
+        <ul style="list-style:none; padding:0; margin:0;">
+          {%- for item in search.results -%}
+            <li style="padding: 14px 0; border-bottom: 1px solid var(--line);">
+              <a href="{{ item.url }}" style="color: var(--ink); font-weight:600; text-decoration:none;">{{ item.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

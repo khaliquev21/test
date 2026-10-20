@@ -1,0 +1,25 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <h2 style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 24px;">{{ 'customer.addresses.title' | t | default: 'Your Addresses' }}</h2>
+      <p><a href="{{ routes.account_url }}">&larr; Back to account</a></p>
+
+      {%- paginate customer.addresses by 10 -%}
+        {%- for address in customer.addresses -%}
+          <div style="background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px;">
+            {%- if address == customer.default_address -%}
+              <strong>{{ 'customer.addresses.default' | t | default: 'Default' }}</strong>
+            {%- endif -%}
+            <p>{{ address | format_address }}</p>
+          </div>
+        {%- endfor -%}
+        {{ paginate | default_pagination }}
+      {%- endpaginate -%}
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

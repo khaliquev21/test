@@ -1,0 +1,30 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{ collection.title }}</h2>
+        {% if collection.description != blank %}<p>{{ collection.description }}</p>{% endif %}
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        {%- for product in collection.products -%}
+          <a href="{{ product.url }}" style="text-decoration:none; color: inherit;">
+            <div class="benefit">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" style="width:100%; border-radius: 12px; margin-bottom: 12px;">
+              {% endif %}
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+            </div>
+          </a>
+        {%- else -%}
+          <p>No products in this collection.</p>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

@@ -1,0 +1,66 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{ 'cart.general.title' | t | default: 'Your cart' }}</h2>
+      </div>
+
+      {%- if cart.item_count > 0 -%}
+        <form action="{{ routes.cart_url }}" method="post" novalidate>
+          <table style="width:100%; border-collapse: collapse;">
+            <thead>
+              <tr style="text-align:left; border-bottom: 1px solid var(--line);">
+                <th style="padding: 12px 0;">Product</th>
+                <th style="padding: 12px 0;">Price</th>
+                <th style="padding: 12px 0;">Quantity</th>
+                <th style="padding: 12px 0; text-align:right;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for item in cart.items -%}
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 16px 0;">
+                    <div style="display:flex; gap:14px; align-items:center;">
+                      {% if item.image %}
+                        <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.title | escape }}" style="width:72px; height:72px; border-radius:10px; object-fit:cover;">
+                      {% endif %}
+                      <div>
+                        <a href="{{ item.url }}" style="color: var(--ink); text-decoration:none; font-weight: 600;">{{ item.product.title }}</a>
+                        {%- unless item.product.has_only_default_variant -%}
+                          <div style="color: var(--mute); font-size: 13px;">{{ item.variant.title }}</div>
+                        {%- endunless -%}
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ item.original_price | money }}</td>
+                  <td>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:56px; padding:6px; border:2px solid var(--line); border-radius:8px; text-align:center;">
+                  </td>
+                  <td style="text-align:right; font-weight: 600;">{{ item.final_line_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          <div style="display:flex; justify-content: space-between; align-items:center; margin-top: 24px; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <button type="submit" name="update" class="btn btn-secondary">Update</button>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size: 20px; margin-bottom: 10px;">Subtotal: <strong>{{ cart.total_price | money }}</strong></div>
+              <button type="submit" name="checkout" class="btn btn-primary">Check out</button>
+            </div>
+          </div>
+        </form>
+      {%- else -%}
+        <p>{{ 'cart.general.empty' | t | default: 'Your cart is empty' }}</p>
+        <p><a href="/collections/all" class="btn btn-primary">Continue shopping</a></p>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

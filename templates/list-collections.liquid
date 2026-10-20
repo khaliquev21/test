@@ -1,0 +1,26 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Collections</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        {%- for collection in collections -%}
+          <a href="{{ collection.url }}" style="text-decoration:none; color: inherit;">
+            <div class="benefit">
+              {% if collection.image %}
+                <img src="{{ collection.image | image_url: width: 400 }}" alt="{{ collection.title | escape }}" style="width:100%; border-radius: 12px; margin-bottom: 12px;">
+              {% endif %}
+              <h3>{{ collection.title }}</h3>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

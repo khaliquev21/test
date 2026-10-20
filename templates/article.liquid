@@ -1,0 +1,19 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <h2 style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 12px;">{{ article.title }}</h2>
+      <div style="color: var(--mute); font-size: 13px; margin-bottom: 24px;">
+        {{ 'blogs.article.posted_on' | t: date: article.published_at | date: format: 'month_day_year' }}
+        {% if article.author %} · {{ 'blogs.article.by_author' | t: author: article.author }}{% endif %}
+      </div>
+      <div class="rte" style="color: var(--ink-soft); line-height: 1.7; font-size: 16px;">
+        {{ article.content }}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

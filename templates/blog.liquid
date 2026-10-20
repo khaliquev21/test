@@ -1,0 +1,24 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{ blog.title }}</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" style="text-decoration:none; color: inherit;">
+            <div class="benefit">
+              <h3>{{ article.title }}</h3>
+              <p>{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

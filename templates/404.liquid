@@ -1,0 +1,14 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 120px; background: var(--cream); text-align: center;">
+    <div class="wrap" style="max-width: 560px;">
+      <h2 style="font-size: clamp(48px, 8vw, 96px); margin-bottom: 16px;">404</h2>
+      <p style="color: var(--ink-soft); font-size: 18px; margin-bottom: 28px;">{{ 'general.404.subtext' | t | default: 'The page you were looking for does not exist.' }}</p>
+      <a href="/" class="btn btn-primary">{{ 'general.404.link' | t | default: 'Continue shopping' }}</a>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

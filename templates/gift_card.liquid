@@ -1,0 +1,25 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money, shop: shop.name }}</title>
+  {{ content_for_header }}
+  {{ 'waterboy.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="waterboy-page">
+  <div class="waterboy">
+    <section style="padding-block: 72px; background: var(--cream); text-align:center;">
+      <div class="wrap" style="max-width: 560px;">
+        <h2 style="font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px;">You've got a gift card!</h2>
+        <div style="font-family: var(--display); font-weight: 900; font-style: italic; font-size: 72px; color: var(--blue-ink); margin: 24px 0;">
+          {{ gift_card.initial_value | money }}
+        </div>
+        <p style="color: var(--ink-soft); margin-bottom: 20px;">Code: <strong>{{ gift_card.code | format_code }}</strong></p>
+        <a href="{{ shop.url }}" class="btn btn-primary">Shop now</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

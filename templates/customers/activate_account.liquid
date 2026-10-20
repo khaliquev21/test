@@ -1,0 +1,26 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 420px;">
+      <h2 style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px;">{{ 'customer.activate_account.title' | t | default: 'Activate account' }}</h2>
+      <p style="color: var(--ink-soft); margin-bottom: 20px;">{{ 'customer.activate_account.subtext' | t | default: 'Create your password to activate your account.' }}</p>
+
+      {% form 'activate_customer_password' %}
+        {{ form.errors | default_errors }}
+        <div style="margin-bottom: 14px;">
+          <label>{{ 'customer.activate_account.password' | t | default: 'Password' }}</label>
+          <input type="password" name="customer[password]" required style="width:100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; margin-top: 6px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label>{{ 'customer.activate_account.password_confirm' | t | default: 'Confirm password' }}</label>
+          <input type="password" name="customer[password_confirmation]" required style="width:100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; margin-top: 6px;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">{{ 'customer.activate_account.submit' | t | default: 'Activate account' }}</button>
+      {% endform %}
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

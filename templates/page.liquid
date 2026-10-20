@@ -1,0 +1,15 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 24px;">{{ page.title }}</h2>
+      <div class="rte" style="color: var(--ink-soft); line-height: 1.7; font-size: 16px;">
+        {{ page.content }}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

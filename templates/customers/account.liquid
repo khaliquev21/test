@@ -1,0 +1,45 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <h2 style="font-size: clamp(32px, 5vw, 48px); margin-bottom: 20px;">{{ 'customer.account.title' | t | default: 'My Account' }}</h2>
+      <p style="color: var(--mute);"><a href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t | default: 'Log out' }}</a></p>
+
+      <h3 style="font-family: var(--body); font-style: normal; text-transform: none; font-size: 20px; margin-top: 36px; margin-bottom: 14px;">{{ 'customer.account.orders' | t | default: 'Order History' }}</h3>
+      {%- if customer.orders.size > 0 -%}
+        <table style="width:100%; border-collapse: collapse;">
+          <thead>
+            <tr style="text-align:left; border-bottom: 1px solid var(--line);">
+              <th style="padding: 10px 0;">{{ 'customer.orders.order' | t }}</th>
+              <th style="padding: 10px 0;">{{ 'customer.orders.date' | t }}</th>
+              <th style="padding: 10px 0;">{{ 'customer.orders.total' | t }}</th>
+              <th style="padding: 10px 0;">{{ 'customer.orders.fulfillment_status' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr style="border-bottom: 1px solid var(--line);">
+                <td style="padding: 12px 0;"><a href="{{ order.customer_url }}" style="color: var(--blue-ink);">{{ order.name }}</a></td>
+                <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                <td>{{ order.total_price | money }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      {%- else -%}
+        <p style="color: var(--ink-soft);">{{ 'customer.orders.none' | t | default: "You haven't placed any orders yet." }}</p>
+      {%- endif -%}
+
+      <h3 style="font-family: var(--body); font-style: normal; text-transform: none; font-size: 20px; margin-top: 36px; margin-bottom: 14px;">{{ 'customer.account.details' | t | default: 'Account Details' }}</h3>
+      {%- if customer.default_address -%}
+        <p>{{ customer.default_address | format_address }}</p>
+      {%- endif -%}
+      <p><a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t | default: 'View Addresses' }}</a></p>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

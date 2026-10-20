@@ -1,0 +1,40 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 760px;">
+      <h2 style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px;">{{ 'customer.order.title' | t: name: order.name | default: order.name }}</h2>
+      <p style="color: var(--mute);">{{ 'customer.order.placed_at' | t: date: order.created_at | date: '%b %d, %Y' }}</p>
+
+      <table style="width:100%; border-collapse: collapse; margin-top: 24px;">
+        <thead>
+          <tr style="text-align:left; border-bottom: 1px solid var(--line);">
+            <th style="padding: 10px 0;">Item</th>
+            <th style="padding: 10px 0;">Price</th>
+            <th style="padding: 10px 0;">Qty</th>
+            <th style="padding: 10px 0; text-align:right;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 12px 0;">{{ line_item.title }}</td>
+              <td>{{ line_item.price | money }}</td>
+              <td>{{ line_item.quantity }}</td>
+              <td style="text-align:right;">{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3" style="padding-top: 14px; text-align:right;">{{ 'customer.order.subtotal' | t }}</td><td style="padding-top:14px; text-align:right;">{{ order.subtotal_price | money }}</td></tr>
+          <tr><td colspan="3" style="text-align:right;">{{ 'customer.order.shipping' | t }}</td><td style="text-align:right;">{{ order.shipping_price | money }}</td></tr>
+          <tr><td colspan="3" style="text-align:right;">{{ 'customer.order.tax' | t }}</td><td style="text-align:right;">{{ order.tax_price | money }}</td></tr>
+          <tr><td colspan="3" style="text-align:right; font-weight: 700;">{{ 'customer.order.total' | t }}</td><td style="text-align:right; font-weight: 700;">{{ order.total_price | money }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

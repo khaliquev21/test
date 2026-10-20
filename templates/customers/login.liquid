@@ -1,0 +1,41 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap" style="max-width: 420px;">
+      <h2 style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 24px;">{{ 'customer.login.title' | t | default: 'Login' }}</h2>
+
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+        <div style="margin-bottom: 14px;">
+          <label>{{ 'customer.login.email' | t | default: 'Email' }}</label>
+          <input type="email" name="customer[email]" required style="width:100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; margin-top: 6px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label>{{ 'customer.login.password' | t | default: 'Password' }}</label>
+          <input type="password" name="customer[password]" required style="width:100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; margin-top: 6px;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">{{ 'customer.login.sign_in' | t | default: 'Sign in' }}</button>
+        <p style="margin-top: 14px;"><a href="#recover" onclick="document.getElementById('recover').style.display='block';return false;" style="color: var(--blue-ink);">{{ 'customer.login.forgot_password' | t | default: 'Forgot your password?' }}</a></p>
+      {% endform %}
+
+      <div id="recover" style="display:none; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line);">
+        <h3 style="font-family: var(--body); font-style: normal; text-transform: none; font-size: 18px; margin-bottom: 12px;">{{ 'customer.recover_password.title' | t | default: 'Reset your password' }}</h3>
+        {% form 'recover_customer_password' %}
+          <div style="margin-bottom: 14px;">
+            <label>{{ 'customer.recover_password.email' | t | default: 'Email' }}</label>
+            <input type="email" name="email" required style="width:100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; margin-top: 6px;">
+          </div>
+          <button type="submit" class="btn btn-secondary">{{ 'customer.recover_password.submit' | t | default: 'Submit' }}</button>
+        {% endform %}
+      </div>
+
+      <p style="margin-top: 28px; color: var(--ink-soft);">
+        <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t | default: 'Create Account' }}</a>
+      </p>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}

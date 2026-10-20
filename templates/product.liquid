@@ -1,0 +1,50 @@
+{% section 'waterboy-nav' %}
+{{ 'waterboy.css' | asset_url | stylesheet_tag }}
+
+<div class="waterboy">
+  <section style="padding-block: 72px; background: var(--cream);">
+    <div class="wrap">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+        <div>
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" style="width:100%; border-radius: 24px;">
+          {% endif %}
+        </div>
+        <div class="pp-details">
+          <h1 class="pp-title">{{ product.title }}</h1>
+          <div class="pp-price-row">
+            <span class="pp-price">{{ product.price | money }}</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="pp-price-was">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+          <div class="pp-tagline">{{ product.description }}</div>
+
+          <form method="post" action="{{ routes.cart_add_url }}">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+            {%- unless product.has_only_default_variant -%}
+              {%- for option in product.options_with_values -%}
+                <div class="variant-group">
+                  <label class="variant-label">{{ option.name }}</label>
+                  <select name="options[{{ option.name | escape }}]">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+
+            <div class="atc-row">
+              <input type="number" name="quantity" value="1" min="1" style="width:60px; padding:8px; border:2px solid var(--line); border-radius:999px; text-align:center;">
+              <button class="atc-btn" type="submit">Add to Cart</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% section 'waterboy-footer' %}
